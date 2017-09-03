@@ -56,6 +56,17 @@ class Lectore(models.Model):
     def __str__(self):
         return (self.nombre)
 
+"""
+    La Clase Lectores almacenan los lectores de tarjetas que hay en cada dependencia
+"""
+
+
+class Grabador(models.Model):
+    nombre = models.CharField(max_length=30, null=False)
+    puerto = models.PositiveIntegerField(null=False)
+
+    def __str__(self):
+        return (self.nombre)
 
 
 """
@@ -76,6 +87,7 @@ class Evento(models.Model):
 
 
 class Usuario(models.Model):
+    uid = models.CharField(max_length=100, null=True)
     nombre = models.CharField(max_length=30, null=False)
     apellido = models.CharField(max_length=30, null=False)
     dni = models.CharField(max_length=9, null=True, unique=True)
@@ -85,6 +97,7 @@ class Usuario(models.Model):
     cp = models.PositiveIntegerField(validators=[MinValueValidator(0),
                                                  MaxValueValidator(99999)], null=True)
     pais = models.CharField(max_length=30, null=True)
+    grabador = models.ForeignKey(Grabador)
     permisos = models.ManyToManyField(Evento)
 
     def __str__(self):
