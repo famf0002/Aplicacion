@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from webService.rest import comprobarAcceso
 
 urlpatterns = [
     url(r'^', admin.site.urls),
-
+    url(r'^rest/(?P<datos>.+)', comprobarAcceso),
 ]
