@@ -11,8 +11,8 @@ from webService.models import Usuario
 
 def update_uid_view(request):
     user = request.GET('user', None)
-    if user is None:
-        raise Http404()
+    """if user is None:
+        raise Http404()"""
 
     usuario = get_object_or_404(Usuario, pk=user)
-    usuario.get_UUID_from_servidor()
+    usuario.get_UID_from_servidor()

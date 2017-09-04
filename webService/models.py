@@ -105,7 +105,9 @@ class Usuario(models.Model):
     def update_uid_link(self):
         return mark_safe("<a href='%s?user=%s'>Actualizar UID</a>" % (reverse('update_uid'),  self.pk))
 
-    def get_UUID_from_servidor(self):
+    def get_UID_from_servidor(self):
+        """Aquí se ejecuta la clase para recoger el UID"""
+        uid = "056055054053052051050049098000000000000000000000"
         return uid
 
     def __str__(self):
@@ -122,9 +124,9 @@ class Lectura(models.Model):
         ('4', 'ERR. USUARIO NO TIENE PERMISOS'),
         ('5', 'ERR. EVENTO NO EXISTE'),
         ('6', 'ERR. EVENTO NO ACTIVO'),
+        ('7', 'ERR. AFORO LLENO'),
     )
 
-    id_usuario = models.ForeignKey(Usuario)
     id_lector = models.ForeignKey(Lectore)
     fecha_hora = models.DateTimeField()
     estado = models.CharField(max_length=1, choices=ESTADOS)

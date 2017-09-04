@@ -56,8 +56,8 @@ admin.site.register(Usuario, admin_usuario)
 
 
 class admin_lectura(admin.ModelAdmin):
-    list_display = ['id', 'id_usuario', 'id_lector', 'fecha_hora', 'estado', 'contenido']
-    list_filter = ['id', 'id_usuario', 'id_lector', 'fecha_hora', 'estado', 'contenido']
+    list_display = ['id',  'id_lector', 'fecha_hora', 'estado', 'contenido']
+    list_filter = ['id',  'id_lector', 'fecha_hora', 'estado', 'contenido']
 
 
 admin.site.register(Lectura,admin_lectura)

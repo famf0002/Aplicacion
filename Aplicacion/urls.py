@@ -21,5 +21,5 @@ from webService.views import update_uid_view
 urlpatterns = [
     url(r'^', admin.site.urls),
     url(r'^rest/(?P<datos>.+)', comprobarAcceso),
-    url(r'^update_uid/$', update_uid_view, 'update_uid'),
+    url(r'^update_uid/$', update_uid_view, name='update_uid'),
 ]
