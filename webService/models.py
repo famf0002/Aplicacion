@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
-
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 """
 La clase emplazamientos almacena los edificios de una organización
@@ -99,6 +100,13 @@ class Usuario(models.Model):
     pais = models.CharField(max_length=30, null=True)
     grabador = models.ForeignKey(Grabador)
     permisos = models.ManyToManyField(Evento)
+
+    @property
+    def update_uid_link(self):
+        return mark_safe("<a href='%s?user=%s'>Actualizar UID</a>" % (reverse('update_uid'),  self.pk))
+
+    def get_UUID_from_servidor(self):
+        return uid
 
     def __str__(self):
         return (self.nombre)

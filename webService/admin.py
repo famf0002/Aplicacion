@@ -4,6 +4,7 @@ from django.contrib import admin
 from models import *
 
 # Register your models here.
+from webService.forms import UsuarioForm
 
 
 class admin_emplazamiento(admin.ModelAdmin):
@@ -48,7 +49,8 @@ admin.site.register(Grabador, admin_grabador)
 class admin_usuario(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais']
     list_filter = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais', 'permisos']
-
+    readonly_fields = ['update_uid_link']
+    form = UsuarioForm
 
 admin.site.register(Usuario, admin_usuario)
 
