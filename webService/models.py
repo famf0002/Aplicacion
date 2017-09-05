@@ -39,6 +39,7 @@ class Dependencia(models.Model):
     id_emplazamiento = models.ForeignKey(Emplazamiento)
     nombre = models.CharField(max_length=30, null=False)
     aforo_maximo = models.PositiveIntegerField(null=False)
+    aforo_actual = models.PositiveIntegerField(null=False, default=0)
 
     def __str__(self):
         return (self.nombre)
@@ -70,23 +71,6 @@ class Grabador(models.Model):
         return (self.nombre)
 
 
-"""
-La Clase Eventos, almacena los eventos que hay en una dependencia, reuniones, cursos....
-"""
-
-
-class Evento(models.Model):
-    id_dependencia = models.ForeignKey(Dependencia)
-    nombre = models.CharField(max_length=30, null=False)
-    fecha_hora_inicio = models.DateTimeField()
-    fecha_hora_fin = models.DateTimeField()
-    aforo_maximo = models.PositiveIntegerField(null=False)
-    aforo_actual = models.PositiveIntegerField(null=False, default=0)
-
-    def __str__(self):
-        return (self.nombre)
-
-
 class Usuario(models.Model):
     uid = models.CharField(max_length=100, null=True)
     nombre = models.CharField(max_length=30, null=False)
@@ -99,42 +83,39 @@ class Usuario(models.Model):
                                                  MaxValueValidator(99999)], null=True)
     pais = models.CharField(max_length=30, null=True)
     grabador = models.ForeignKey(Grabador)
-    permisos = models.ManyToManyField(Evento)
-
+    permisos = models.ManyToManyField(Dependencia)
+    """
     @property
     def update_uid_link(self):
         return mark_safe("<a href='%s?user=%s'>Actualizar UID</a>" % (reverse('update_uid'),  self.pk))
 
     def get_UID_from_servidor(self):
-        """Aquí se ejecuta la clase para recoger el UID"""
+        
         uid = "056055054053052051050049098000000000000000000000"
         return uid
-
+    """
     def __str__(self):
         return (self.nombre)
 
 
 
 class Lectura(models.Model):
-
     ESTADOS = (
         ('1', 'OK'),
         ('2', 'ERR. LECTOR NO EXISTE'),
         ('3', 'ERR. USUARIO NO EXISTE'),
         ('4', 'ERR. USUARIO NO TIENE PERMISOS'),
-        ('5', 'ERR. EVENTO NO EXISTE'),
-        ('6', 'ERR. EVENTO NO ACTIVO'),
-        ('7', 'ERR. AFORO LLENO'),
+        ('5', 'ERR. AFORO LLENO'),
     )
 
-    id_lector = models.ForeignKey(Lectore)
+    id_lector = models.PositiveIntegerField(null=True)
     fecha_hora = models.DateTimeField()
     estado = models.CharField(max_length=1, choices=ESTADOS)
     contenido = models.CharField(max_length=300)
 
 class Acceso(models.Model):
     id_usuario = models.ForeignKey(Usuario)
-    id_evento = models.ForeignKey(Evento)
+    id_sala = models.ForeignKey(Dependencia)
     id_lector = models.ForeignKey(Lectore)
     fecha_hora_entrada = models.DateTimeField(null=False, default=datetime.datetime.now())
     fecha_hora_salida = models.DateTimeField(null=True,default=None)

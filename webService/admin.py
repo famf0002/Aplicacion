@@ -21,17 +21,6 @@ class admin_dependencia(admin.ModelAdmin):
 
 admin.site.register(Dependencia, admin_dependencia)
 
-
-class admin_evento(admin.ModelAdmin):
-    list_display = ['id', 'id_dependencia', 'nombre', 'fecha_hora_inicio', 'fecha_hora_fin', 'aforo_maximo',
-                    'aforo_actual']
-    list_filter = ['id', 'id_dependencia', 'nombre', 'fecha_hora_inicio', 'fecha_hora_fin', 'aforo_maximo',
-                     'aforo_actual']
-
-
-admin.site.register(Evento, admin_evento)
-
-
 class admin_lectore(admin.ModelAdmin):
     list_display = ['id', 'id_dependencia', 'nombre']
     list_filter = ['id', 'id_dependencia', 'nombre']
@@ -49,8 +38,8 @@ admin.site.register(Grabador, admin_grabador)
 class admin_usuario(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais']
     list_filter = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais', 'permisos']
-    readonly_fields = ['update_uid_link']
-    form = UsuarioForm
+    """readonly_fields = ['update_uid_link']"""
+    """form = UsuarioForm"""
 
 admin.site.register(Usuario, admin_usuario)
 
@@ -64,8 +53,8 @@ admin.site.register(Lectura,admin_lectura)
 
 
 class admin_acceso(admin.ModelAdmin):
-    list_display = ['id_usuario', 'id_evento', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
-    list_filter = ['id_usuario', 'id_evento', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
+    list_display = ['id_usuario', 'id_sala', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
+    list_filter = ['id_usuario', 'id_sala', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
 
 
 admin.site.register(Acceso, admin_acceso)
