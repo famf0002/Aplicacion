@@ -101,11 +101,13 @@ class Usuario(models.Model):
 
 class Lectura(models.Model):
     ESTADOS = (
-        ('1', 'OK'),
+        ('1', 'OK.'),
         ('2', 'ERR. LECTOR NO EXISTE'),
         ('3', 'ERR. USUARIO NO EXISTE'),
         ('4', 'ERR. USUARIO NO TIENE PERMISOS'),
         ('5', 'ERR. AFORO LLENO'),
+        ('6', 'OK. SALIDA CORRECTA'),
+        ('7', 'OK. ENTRADA CORRECTA'),
     )
 
     id_lector = models.PositiveIntegerField(null=True)
@@ -115,7 +117,7 @@ class Lectura(models.Model):
 
 class Acceso(models.Model):
     id_usuario = models.ForeignKey(Usuario)
-    id_sala = models.ForeignKey(Dependencia)
+    id_dependencia = models.ForeignKey(Dependencia)
     id_lector = models.ForeignKey(Lectore)
-    fecha_hora_entrada = models.DateTimeField(null=False, default=datetime.datetime.now())
-    fecha_hora_salida = models.DateTimeField(null=True,default=None)
+    fecha_hora_entrada = models.DateTimeField(auto_now_add=True, auto_now=False, null=False)
+    fecha_hora_salida = models.DateTimeField(auto_now_add=False, auto_now=False, null=True)

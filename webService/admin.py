@@ -53,8 +53,8 @@ admin.site.register(Lectura,admin_lectura)
 
 
 class admin_acceso(admin.ModelAdmin):
-    list_display = ['id_usuario', 'id_sala', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
-    list_filter = ['id_usuario', 'id_sala', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
+    list_display = ['id_usuario', 'id_dependencia', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
+    list_filter = ['id_usuario', 'id_dependencia', 'id_lector', 'fecha_hora_entrada', 'fecha_hora_salida']
 
 
 admin.site.register(Acceso, admin_acceso)
