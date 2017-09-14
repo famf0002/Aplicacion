@@ -13,13 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from webService.rest import comprobarAcceso
 from webService.views import update_uid_view
 
 urlpatterns = [
-    url(r'^', admin.site.urls),
+    url(r'^jet/', include('jet.urls', 'jet')),
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     url(r'^rest/(?P<datos>.+)', comprobarAcceso),
     url(r'^update_uid/$', update_uid_view, name='update_uid'),
+    url(r'^', admin.site.urls),
 ]

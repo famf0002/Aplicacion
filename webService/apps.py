@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class WebserviceConfig(AppConfig):
-    name = 'webService'
+    name = 'Plataforma RFID'

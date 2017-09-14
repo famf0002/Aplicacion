@@ -25,12 +25,14 @@ SECRET_KEY = 'v=ctm$^ux2cdnuc^qtyp+stjf%9)n=)d)(%6qfk6_--jgkgk!p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['192.168.43.187','server1','127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,12 +65,14 @@ TEMPLATES = [
         'OPTIONS': {
 
             'context_processors': [
+                'django.template.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
 
+            ],
+            'debug':DEBUG,
         },
     },
 ]
@@ -117,16 +121,55 @@ TIME_INPUT_FORMATS = (
             '%H:%M:%S',     # '14:30:59'
 )
 
-#USE_I18N = True
+USE_I18N = True
 
-#USE_L10N = True
+USE_L10N = True
 
-#USE_TZ = True
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+
+JET_SIDE_MENU_COMPACT = True
+
+JET_DEFAULT_THEME = 'light-green'
+JET_CHANGE_FORM_SIBLING_LINKS = True
+
+JET_THEMES = [
+    {
+        'theme': 'default', # theme folder name
+        'color': '#47bac1', # color of the theme's button in user menu
+        'title': 'Default' # theme title
+    },
+    {
+        'theme': 'green',
+        'color': '#44b78b',
+        'title': 'Green'
+    },
+    {
+        'theme': 'light-green',
+        'color': '#2faa60',
+        'title': 'Light Green'
+    },
+    {
+        'theme': 'light-violet',
+        'color': '#a464c4',
+        'title': 'Light Violet'
+    },
+    {
+        'theme': 'light-blue',
+        'color': '#5EADDE',
+        'title': 'Light Blue'
+    },
+    {
+        'theme': 'light-gray',
+        'color': '#222',
+        'title': 'Light Gray'
+    }
+]

@@ -72,7 +72,7 @@ class Grabador(models.Model):
 
 
 class Usuario(models.Model):
-    uid = models.CharField(max_length=100, null=True)
+    uid = models.CharField(max_length=100, null=True, blank=True)
     nombre = models.CharField(max_length=30, null=False)
     apellido = models.CharField(max_length=30, null=False)
     dni = models.CharField(max_length=9, null=True, unique=True)
@@ -84,16 +84,17 @@ class Usuario(models.Model):
     pais = models.CharField(max_length=30, null=True)
     grabador = models.ForeignKey(Grabador)
     permisos = models.ManyToManyField(Dependencia)
-    """
+
     @property
     def update_uid_link(self):
-        return mark_safe("<a href='%s?user=%s'>Actualizar UID</a>" % (reverse('update_uid'),  self.pk))
+        return mark_safe("<div class=\"form-row\"><div><a class=\"btn btn-primary\" href= \"%s?user=%s\">Actualizar UID</a></div></div>" % (
+        reverse('update_uid'), self.pk))
 
     def get_UID_from_servidor(self):
-        
-        uid = "056055054053052051050049098000000000000000000000"
-        return uid
-    """
+        #self.uid = "056055054053052051050049098000000000000000000010"
+        return "056055054053052051050049098000000000000000000014"
+
+
     def __str__(self):
         return (self.nombre)
 
