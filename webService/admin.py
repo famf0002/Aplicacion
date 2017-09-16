@@ -36,9 +36,9 @@ class admin_grabador(admin.ModelAdmin):
 admin.site.register(Grabador, admin_grabador)
 
 class admin_usuario(admin.ModelAdmin):
+    readonly_fields = ['uid', 'update_uid_link']
     list_display = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais']
     list_filter = ['id', 'nombre', 'apellido', 'dni', 'direccion', 'poblacion', 'provincia', 'cp', 'pais', 'permisos']
-    readonly_fields = ['update_uid_link']
     form = UsuarioForm
 
 admin.site.register(Usuario, admin_usuario)

@@ -10,6 +10,7 @@ from django.dispatch import receiver
 # Create your models here.
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from webService.grabarRFID import grabarRFID
 
 """
 La clase emplazamientos almacena los edificios de una organización
@@ -87,12 +88,17 @@ class Usuario(models.Model):
 
     @property
     def update_uid_link(self):
-        return mark_safe("<div class=\"form-row\"><div><a class=\"btn btn-primary\" href= \"%s?user=%s\">Actualizar UID</a></div></div>" % (
+        return mark_safe("<a class=\"btn btn-primary\" href= \"%s?user=%s\">Actualizar UID</a>" % (
         reverse('update_uid'), self.pk))
 
     def get_UID_from_servidor(self):
         #self.uid = "056055054053052051050049098000000000000000000010"
-        return "056055054053052051050049098000000000000000000014"
+        try:
+            self.uid = grabarRFID().grabar(puerto=1111,dni="77362393f")
+            return self.uid
+        except Exception,e:
+            print e
+            return "056055054053052051050049098000000000000000987"
 
 
     def __str__(self):
