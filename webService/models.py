@@ -88,8 +88,7 @@ class Usuario(models.Model):
 
     @property
     def update_uid_link(self):
-        return mark_safe("<a class=\"btn btn-primary\" href= \"%s?user=%s\">Actualizar UID</a>" % (
-        reverse('update_uid'), self.pk))
+        return mark_safe("<a class=\"btn btn-primary\" href=\"%s?user=%s\">Actualizar UID</a>" % (reverse('update_uid'), self.pk))
 
     def get_UID_from_servidor(self):
         #self.uid = "056055054053052051050049098000000000000000000010"

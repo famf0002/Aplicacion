@@ -32,5 +32,6 @@ def update_uid_view(request):
                                                 args=(usuario.pk,),), ValidationError("Error al grabar la tarjeta"))
 
     except:
-        return HttpResponseRedirect(reverse('admin:webService_usuario_change', args=(usuario.pk, )), ),ValidationError("Error al grabar la tarjeta")
+        return HttpResponseRedirect(reverse('admin:webService_usuario_change',
+                                            args=(usuario.pk, )), ),ValidationError("Error al grabar la tarjeta")
 
